@@ -8,3 +8,7 @@
 upload.tar
 /build/
 PyZ3950/PyZ3950_parsetab.py
+
+# output of ply lex and yacc
+parsetab.py
+parser.out
