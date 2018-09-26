@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# Auto-generated from ../compiler/tests/z3950-2001.txt at Mon, 26 Jul 2004 17:30:19 +0000
+# Auto-generated from ../compiler/tests/z3950-2001.txt at Wed, 26 Sep 2018 04:22:42 +0000
 from PyZ3950 import asn1
 #module Module None
 KnownProximityUnit=asn1.INTEGER_class ([('character',1),('word',2),('sentence',3),('paragraph',4),('section',5),('chapter',6),('document',7),('element',8),('subelement',9),('elementType',10),('byte',11)],None,None)
@@ -15,7 +15,6 @@ DeleteSetStatus=asn1.TYPE(asn1.IMPLICIT(33,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_c
 PresentStatus=asn1.TYPE(asn1.IMPLICIT(27,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([('success',0),('partial_1',1),('partial_2',2),('partial_3',3),('partial_4',4),('failure',5)],None,None))
 StringOrNumeric=asn1.CHOICE ([('string',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),InternationalString)),
     ('numeric',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None)))])
-AttributeSetId=asn1.OBJECT_IDENTIFIER
 ProximityOperator=asn1.SEQUENCE ([('exclusion',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),asn1.BOOLEAN),1),
     ('distance',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None)),0),
     ('ordered',None,asn1.TYPE(asn1.IMPLICIT(3,cls=asn1.CONTEXT_FLAG),asn1.BOOLEAN),0),
@@ -29,25 +28,16 @@ Unit=asn1.SEQUENCE ([('unitSystem',None,asn1.TYPE(asn1.EXPLICIT(1,cls=asn1.CONTE
     ('unit',None,asn1.TYPE(asn1.EXPLICIT(3,cls=asn1.CONTEXT_FLAG),StringOrNumeric),1),
     ('scaleFactor',None,asn1.TYPE(asn1.IMPLICIT(4,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None)),1)], seq_name = 'Unit')
 CloseReason=asn1.TYPE(asn1.IMPLICIT(211,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([('finished',0),('shutdown',1),('systemProblem',2),('costLimit',3),('resources',4),('securityViolation',5),('protocolError',6),('lackOfActivity',7),('responseToPeer',8),('unspecified',9)],None,None))
-AttributeElement=asn1.SEQUENCE ([('attributeSet',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),AttributeSetId),1),
-    ('attributeType',None,asn1.TYPE(asn1.IMPLICIT(120,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None)),0),
-    ('attributeValue',None,    asn1.CHOICE ([('numeric',None,asn1.TYPE(asn1.IMPLICIT(121,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None))),
-        ('complex',None,asn1.TYPE(asn1.IMPLICIT(224,cls=asn1.CONTEXT_FLAG),        asn1.SEQUENCE ([('list',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),            asn1.SEQUENCE_OF (StringOrNumeric)),0),
-            ('semanticAction',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),            asn1.SEQUENCE_OF (asn1.INTEGER_class ([],None,None))),1)], seq_name = None)))]),0)], seq_name = 'AttributeElement')
 DefaultDiagFormat=asn1.SEQUENCE ([('diagnosticSetId',None,asn1.OBJECT_IDENTIFIER,0),
     ('condition',None,asn1.INTEGER_class ([],None,None),0),
     ('addinfo',None,    asn1.CHOICE ([('v2Addinfo',None,asn1.VisibleString),
         ('v3Addinfo',None,InternationalString)]),0)], seq_name = 'DefaultDiagFormat')
+ProtocolVersion=asn1.TYPE(asn1.IMPLICIT(3,cls=asn1.CONTEXT_FLAG),asn1.BITSTRING_class ([('version_1',0),('version_2',1),('version_3',2)],None,None))
 ResourceReportId=asn1.OBJECT_IDENTIFIER
 FragmentSyntax=asn1.CHOICE ([('externallyTagged',None,asn1.EXTERNAL),
     ('notExternallyTagged',None,asn1.OCTSTRING)])
-Operator=asn1.TYPE(asn1.EXPLICIT(46,cls=asn1.CONTEXT_FLAG),asn1.CHOICE ([('and',None,asn1.TYPE(asn1.IMPLICIT(0,cls=asn1.CONTEXT_FLAG),asn1.NULL)),
-    ('or',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),asn1.NULL)),
-    ('and_not',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),asn1.NULL)),
-    ('prox',None,asn1.TYPE(asn1.IMPLICIT(3,cls=asn1.CONTEXT_FLAG),ProximityOperator))]))
 DiagRec=asn1.CHOICE ([('defaultFormat',None,DefaultDiagFormat),
     ('externallyDefined',None,asn1.EXTERNAL)])
-ProtocolVersion=asn1.TYPE(asn1.IMPLICIT(3,cls=asn1.CONTEXT_FLAG),asn1.BITSTRING_class ([('version_1',0),('version_2',1),('version_3',2)],None,None))
 Range=asn1.SEQUENCE ([('startingPosition',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None)),0),
     ('numberOfRecords',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None)),0)], seq_name = 'Range')
 ReferenceId=asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),asn1.OCTSTRING)
@@ -62,9 +52,13 @@ DuplicateDetectionCriterion=asn1.CHOICE ([('levelOfMatch',None,asn1.TYPE(asn1.IM
     ('rsDuplicates',None,asn1.TYPE(asn1.IMPLICIT(5,cls=asn1.CONTEXT_FLAG),asn1.NULL))])
 InfoCategory=asn1.SEQUENCE ([('categoryTypeId',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),asn1.OBJECT_IDENTIFIER),1),
     ('categoryValue',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None)),0)], seq_name = 'InfoCategory')
-AttributeList=asn1.TYPE(asn1.IMPLICIT(44,cls=asn1.CONTEXT_FLAG),asn1.SEQUENCE_OF (AttributeElement))
 ResultSetId=asn1.TYPE(asn1.IMPLICIT(31,cls=asn1.CONTEXT_FLAG),InternationalString)
 DatabaseName=asn1.TYPE(asn1.IMPLICIT(105,cls=asn1.CONTEXT_FLAG),InternationalString)
+Operator=asn1.TYPE(asn1.EXPLICIT(46,cls=asn1.CONTEXT_FLAG),asn1.CHOICE ([('and',None,asn1.TYPE(asn1.IMPLICIT(0,cls=asn1.CONTEXT_FLAG),asn1.NULL)),
+    ('or',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),asn1.NULL)),
+    ('and_not',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),asn1.NULL)),
+    ('prox',None,asn1.TYPE(asn1.IMPLICIT(3,cls=asn1.CONTEXT_FLAG),ProximityOperator))]))
+AttributeSetId=asn1.OBJECT_IDENTIFIER
 IdAuthentication=asn1.CHOICE ([('open',None,asn1.VisibleString),
     ('idPass',None,    asn1.SEQUENCE ([('groupId',None,asn1.TYPE(asn1.IMPLICIT(0,cls=asn1.CONTEXT_FLAG),InternationalString),1),
         ('userId',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),InternationalString),1),
@@ -77,10 +71,6 @@ SortCriterion=asn1.CHOICE ([('mostComprehensive',None,asn1.TYPE(asn1.IMPLICIT(1,
     ('oldest',None,asn1.TYPE(asn1.IMPLICIT(4,cls=asn1.CONTEXT_FLAG),asn1.NULL)),
     ('leastCost',None,asn1.TYPE(asn1.IMPLICIT(5,cls=asn1.CONTEXT_FLAG),asn1.NULL)),
     ('preferredDatabases',None,asn1.TYPE(asn1.IMPLICIT(6,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE_OF (InternationalString)))])
-SortKey=asn1.CHOICE ([('privateSortKey',None,asn1.TYPE(asn1.IMPLICIT(0,cls=asn1.CONTEXT_FLAG),InternationalString)),
-    ('elementSpec',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),Specification)),
-    ('sortAttributes',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE ([('id',None,AttributeSetId,0),
-        ('list',None,AttributeList,0)], seq_name = None)))])
 ListStatuses=asn1.SEQUENCE_OF (asn1.SEQUENCE ([('id',None,ResultSetId,0),
     ('status',None,DeleteSetStatus,0)], seq_name = None))
 OtherInformation=asn1.TYPE(asn1.IMPLICIT(201,cls=asn1.CONTEXT_FLAG),asn1.SEQUENCE_OF (asn1.SEQUENCE ([('category',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),InfoCategory),1),
@@ -88,8 +78,6 @@ OtherInformation=asn1.TYPE(asn1.IMPLICIT(201,cls=asn1.CONTEXT_FLAG),asn1.SEQUENC
         ('binaryInfo',None,asn1.TYPE(asn1.IMPLICIT(3,cls=asn1.CONTEXT_FLAG),asn1.OCTSTRING)),
         ('externallyDefinedInfo',None,asn1.TYPE(asn1.IMPLICIT(4,cls=asn1.CONTEXT_FLAG),asn1.EXTERNAL)),
         ('oid',None,asn1.TYPE(asn1.IMPLICIT(5,cls=asn1.CONTEXT_FLAG),asn1.OBJECT_IDENTIFIER))]),0)], seq_name = None)))
-ResultSetPlusAttributes=asn1.TYPE(asn1.IMPLICIT(214,cls=asn1.CONTEXT_FLAG),asn1.SEQUENCE ([('resultSet',None,ResultSetId,0),
-    ('attributes',None,AttributeList,0)], seq_name = 'ResultSetPlusAttributes'))
 InitializeResponse=asn1.SEQUENCE ([('referenceId',None,ReferenceId,1),
     ('protocolVersion',None,ProtocolVersion,0),
     ('options',None,Options,0),
@@ -101,14 +89,19 @@ InitializeResponse=asn1.SEQUENCE ([('referenceId',None,ReferenceId,1),
     ('implementationVersion',None,asn1.TYPE(asn1.IMPLICIT(112,cls=asn1.CONTEXT_FLAG),InternationalString),1),
     ('userInformationField',None,asn1.TYPE(asn1.EXPLICIT(11,cls=asn1.CONTEXT_FLAG),asn1.EXTERNAL),1),
     ('otherInfo',None,OtherInformation,1)], seq_name = 'InitializeResponse')
-SortElement=asn1.CHOICE ([('generic',None,asn1.TYPE(asn1.EXPLICIT(1,cls=asn1.CONTEXT_FLAG),SortKey)),
-    ('datbaseSpecific',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE_OF (    asn1.SEQUENCE ([('databaseName',None,DatabaseName,0),
-        ('dbSort',None,SortKey,0)], seq_name = None))))])
 IntUnit=asn1.SEQUENCE ([('value',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None)),0),
     ('unitUsed',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),Unit),0)], seq_name = 'IntUnit')
-ElementSetNames=asn1.CHOICE ([('genericElementSetName',None,asn1.TYPE(asn1.IMPLICIT(0,cls=asn1.CONTEXT_FLAG),InternationalString)),
-    ('databaseSpecific',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE_OF (    asn1.SEQUENCE ([('dbName',None,DatabaseName,0),
-        ('esn',None,ElementSetName,0)], seq_name = None))))])
+InitializeRequest=asn1.SEQUENCE ([('referenceId',None,ReferenceId,1),
+    ('protocolVersion',None,ProtocolVersion,0),
+    ('options',None,Options,0),
+    ('preferredMessageSize',None,asn1.TYPE(asn1.IMPLICIT(5,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None)),0),
+    ('exceptionalRecordSize',None,asn1.TYPE(asn1.IMPLICIT(6,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None)),0),
+    ('idAuthentication',None,asn1.TYPE(asn1.EXPLICIT(7,cls=asn1.CONTEXT_FLAG),asn1.ANY),1),
+    ('implementationId',None,asn1.TYPE(asn1.IMPLICIT(110,cls=asn1.CONTEXT_FLAG),InternationalString),1),
+    ('implementationName',None,asn1.TYPE(asn1.IMPLICIT(111,cls=asn1.CONTEXT_FLAG),InternationalString),1),
+    ('implementationVersion',None,asn1.TYPE(asn1.IMPLICIT(112,cls=asn1.CONTEXT_FLAG),InternationalString),1),
+    ('userInformationField',None,asn1.TYPE(asn1.EXPLICIT(11,cls=asn1.CONTEXT_FLAG),asn1.EXTERNAL),1),
+    ('otherInfo',None,OtherInformation,1)], seq_name = 'InitializeRequest')
 SortResponse=asn1.SEQUENCE ([('referenceId',None,ReferenceId,1),
     ('sortStatus',None,asn1.TYPE(asn1.IMPLICIT(3,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([('success',0),('partial_1',1),('failure',2)],None,None)),0),
     ('resultSetStatus',None,asn1.TYPE(asn1.IMPLICIT(4,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([('empty',1),('interim',2),('unchanged',3),('none',4)],None,None)),1),
@@ -123,17 +116,9 @@ Term=asn1.CHOICE ([('general',None,asn1.TYPE(asn1.IMPLICIT(45,cls=asn1.CONTEXT_F
     ('external',None,asn1.TYPE(asn1.IMPLICIT(219,cls=asn1.CONTEXT_FLAG),asn1.EXTERNAL)),
     ('integerAndUnit',None,asn1.TYPE(asn1.IMPLICIT(220,cls=asn1.CONTEXT_FLAG),IntUnit)),
     ('null',None,asn1.TYPE(asn1.IMPLICIT(221,cls=asn1.CONTEXT_FLAG),asn1.NULL))])
-InitializeRequest=asn1.SEQUENCE ([('referenceId',None,ReferenceId,1),
-    ('protocolVersion',None,ProtocolVersion,0),
-    ('options',None,Options,0),
-    ('preferredMessageSize',None,asn1.TYPE(asn1.IMPLICIT(5,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None)),0),
-    ('exceptionalRecordSize',None,asn1.TYPE(asn1.IMPLICIT(6,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None)),0),
-    ('idAuthentication',None,asn1.TYPE(asn1.EXPLICIT(7,cls=asn1.CONTEXT_FLAG),asn1.ANY),1),
-    ('implementationId',None,asn1.TYPE(asn1.IMPLICIT(110,cls=asn1.CONTEXT_FLAG),InternationalString),1),
-    ('implementationName',None,asn1.TYPE(asn1.IMPLICIT(111,cls=asn1.CONTEXT_FLAG),InternationalString),1),
-    ('implementationVersion',None,asn1.TYPE(asn1.IMPLICIT(112,cls=asn1.CONTEXT_FLAG),InternationalString),1),
-    ('userInformationField',None,asn1.TYPE(asn1.EXPLICIT(11,cls=asn1.CONTEXT_FLAG),asn1.EXTERNAL),1),
-    ('otherInfo',None,OtherInformation,1)], seq_name = 'InitializeRequest')
+ElementSetNames=asn1.CHOICE ([('genericElementSetName',None,asn1.TYPE(asn1.IMPLICIT(0,cls=asn1.CONTEXT_FLAG),InternationalString)),
+    ('databaseSpecific',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE_OF (    asn1.SEQUENCE ([('dbName',None,DatabaseName,0),
+        ('esn',None,ElementSetName,0)], seq_name = None))))])
 ExtendedServicesResponse=asn1.SEQUENCE ([('referenceId',None,ReferenceId,1),
     ('operationStatus',None,asn1.TYPE(asn1.IMPLICIT(3,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([('done',1),('accepted',2),('failure',3)],None,None)),0),
     ('diagnostics',None,asn1.TYPE(asn1.IMPLICIT(4,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE_OF (DiagRec)),1),
@@ -165,8 +150,6 @@ CompSpec=asn1.SEQUENCE ([('selectAlternativeSyntax',None,asn1.TYPE(asn1.IMPLICIT
     ('dbSpecific',None,asn1.TYPE(asn1.IMPLICIT(3,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE_OF (    asn1.SEQUENCE ([('db',None,asn1.TYPE(asn1.EXPLICIT(1,cls=asn1.CONTEXT_FLAG),DatabaseName),0),
         ('spec',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),Specification),0)], seq_name = None))),1),
     ('recordSyntax',None,asn1.TYPE(asn1.IMPLICIT(4,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE_OF (asn1.OBJECT_IDENTIFIER)),1)], seq_name = 'CompSpec')
-AttributesPlusTerm=asn1.TYPE(asn1.IMPLICIT(102,cls=asn1.CONTEXT_FLAG),asn1.SEQUENCE ([('attributes',None,AttributeList,0),
-    ('term',None,Term,0)], seq_name = 'AttributesPlusTerm'))
 NamePlusRecord=asn1.SEQUENCE ([('name',None,asn1.TYPE(asn1.IMPLICIT(0,cls=asn1.CONTEXT_FLAG),DatabaseName),1),
     ('record',None,asn1.TYPE(asn1.EXPLICIT(1,cls=asn1.CONTEXT_FLAG),    asn1.CHOICE ([('retrievalRecord',None,asn1.TYPE(asn1.EXPLICIT(1,cls=asn1.CONTEXT_FLAG),asn1.EXTERNAL)),
         ('surrogateDiagnostic',None,asn1.TYPE(asn1.EXPLICIT(2,cls=asn1.CONTEXT_FLAG),DiagRec)),
@@ -177,15 +160,16 @@ ResourceReportResponse=asn1.SEQUENCE ([('referenceId',None,ReferenceId,1),
     ('resourceReportStatus',None,asn1.TYPE(asn1.IMPLICIT(50,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([('success',0),('partial',1),('failure_1',2),('failure_2',3),('failure_3',4),('failure_4',5),('failure_5',6),('failure_6',7)],None,None)),0),
     ('resourceReport',None,asn1.TYPE(asn1.EXPLICIT(51,cls=asn1.CONTEXT_FLAG),ResourceReport),1),
     ('otherInfo',None,OtherInformation,1)], seq_name = 'ResourceReportResponse')
-Operand=asn1.CHOICE ([('attrTerm',None,AttributesPlusTerm),
-    ('resultSet',None,ResultSetId),
-    ('resultAttr',None,ResultSetPlusAttributes)])
-SortKeySpec=asn1.SEQUENCE ([('sortElement',None,SortElement,0),
-    ('sortRelation',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([('ascending',0),('descending',1),('ascendingByFrequency',3),('descendingByfrequency',4)],None,None)),0),
-    ('caseSensitivity',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([('caseSensitive',0),('caseInsensitive',1)],None,None)),0),
-    ('missingValueAction',None,asn1.TYPE(asn1.EXPLICIT(3,cls=asn1.CONTEXT_FLAG),    asn1.CHOICE ([('abort',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),asn1.NULL)),
-        ('null',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),asn1.NULL)),
-        ('missingValueData',None,asn1.TYPE(asn1.IMPLICIT(3,cls=asn1.CONTEXT_FLAG),asn1.OCTSTRING))])),1)], seq_name = 'SortKeySpec')
+DuplicateDetectionResponse=asn1.SEQUENCE ([('referenceId',None,ReferenceId,1),
+    ('status',None,asn1.TYPE(asn1.IMPLICIT(3,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([('success',0),('failure',1)],None,None)),0),
+    ('resultSetCount',None,asn1.TYPE(asn1.IMPLICIT(4,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None)),1),
+    ('diagnostics',None,asn1.TYPE(asn1.IMPLICIT(5,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE_OF (DiagRec)),1),
+    ('otherInfo',None,OtherInformation,1)], seq_name = 'DuplicateDetectionResponse')
+AttributeElement=asn1.SEQUENCE ([('attributeSet',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),AttributeSetId),1),
+    ('attributeType',None,asn1.TYPE(asn1.IMPLICIT(120,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None)),0),
+    ('attributeValue',None,    asn1.CHOICE ([('numeric',None,asn1.TYPE(asn1.IMPLICIT(121,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None))),
+        ('complex',None,asn1.TYPE(asn1.IMPLICIT(224,cls=asn1.CONTEXT_FLAG),        asn1.SEQUENCE ([('list',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),            asn1.SEQUENCE_OF (StringOrNumeric)),0),
+            ('semanticAction',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),            asn1.SEQUENCE_OF (asn1.INTEGER_class ([],None,None))),1)], seq_name = None)))]),0)], seq_name = 'AttributeElement')
 ResourceControlRequest=asn1.SEQUENCE ([('referenceId',None,ReferenceId,1),
     ('suspendedFlag',None,asn1.TYPE(asn1.IMPLICIT(39,cls=asn1.CONTEXT_FLAG),asn1.BOOLEAN),1),
     ('resourceReport',None,asn1.TYPE(asn1.EXPLICIT(40,cls=asn1.CONTEXT_FLAG),ResourceReport),1),
@@ -206,11 +190,6 @@ ResourceControlResponse=asn1.SEQUENCE ([('referenceId',None,ReferenceId,1),
     ('continueFlag',None,asn1.TYPE(asn1.IMPLICIT(44,cls=asn1.CONTEXT_FLAG),asn1.BOOLEAN),0),
     ('resultSetWanted',None,asn1.TYPE(asn1.IMPLICIT(45,cls=asn1.CONTEXT_FLAG),asn1.BOOLEAN),1),
     ('otherInfo',None,OtherInformation,1)], seq_name = 'ResourceControlResponse')
-DuplicateDetectionResponse=asn1.SEQUENCE ([('referenceId',None,ReferenceId,1),
-    ('status',None,asn1.TYPE(asn1.IMPLICIT(3,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([('success',0),('failure',1)],None,None)),0),
-    ('resultSetCount',None,asn1.TYPE(asn1.IMPLICIT(4,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None)),1),
-    ('diagnostics',None,asn1.TYPE(asn1.IMPLICIT(5,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE_OF (DiagRec)),1),
-    ('otherInfo',None,OtherInformation,1)], seq_name = 'DuplicateDetectionResponse')
 PresentRequest=asn1.SEQUENCE ([('referenceId',None,ReferenceId,1),
     ('resultSetId',None,ResultSetId,0),
     ('resultSetStartPoint',None,asn1.TYPE(asn1.IMPLICIT(30,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None)),0),
@@ -249,12 +228,6 @@ DeleteResultSetRequest=asn1.SEQUENCE ([('referenceId',None,ReferenceId,1),
     ('deleteFunction',None,asn1.TYPE(asn1.IMPLICIT(32,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([('list',0),('all',1)],None,None)),0),
     ('resultSetList',None,    asn1.SEQUENCE_OF (ResultSetId),1),
     ('otherInfo',None,OtherInformation,1)], seq_name = 'DeleteResultSetRequest')
-OccurrenceByAttributes=asn1.SEQUENCE_OF (asn1.SEQUENCE ([('attributes',None,asn1.TYPE(asn1.EXPLICIT(1,cls=asn1.CONTEXT_FLAG),AttributeList),0),
-    ('occurrences',None,    asn1.CHOICE ([('global',None,asn1.TYPE(asn1.EXPLICIT(2,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None))),
-        ('byDatabase',None,asn1.TYPE(asn1.IMPLICIT(3,cls=asn1.CONTEXT_FLAG),        asn1.SEQUENCE_OF (        asn1.SEQUENCE ([('db',None,DatabaseName,0),
-            ('num',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None)),1),
-            ('otherDbInfo',None,OtherInformation,1)], seq_name = None))))]),1),
-    ('otherOccurInfo',None,OtherInformation,1)], seq_name = None))
 Records=asn1.CHOICE ([('responseRecords',None,asn1.TYPE(asn1.IMPLICIT(28,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE_OF (NamePlusRecord))),
     ('nonSurrogateDiagnostic',None,asn1.TYPE(asn1.IMPLICIT(130,cls=asn1.CONTEXT_FLAG),DefaultDiagFormat)),
     ('multipleNonSurDiagnostics',None,asn1.TYPE(asn1.IMPLICIT(205,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE_OF (DiagRec)))])
@@ -262,13 +235,6 @@ Segment=asn1.SEQUENCE ([('referenceId',None,ReferenceId,1),
     ('numberOfRecordsReturned',None,asn1.TYPE(asn1.IMPLICIT(24,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None)),0),
     ('segmentRecords',None,asn1.TYPE(asn1.IMPLICIT(0,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE_OF (NamePlusRecord)),0),
     ('otherInfo',None,OtherInformation,1)], seq_name = 'Segment')
-TermInfo=asn1.SEQUENCE ([('term',None,Term,0),
-    ('displayTerm',None,asn1.TYPE(asn1.IMPLICIT(0,cls=asn1.CONTEXT_FLAG),InternationalString),1),
-    ('suggestedAttributes',None,AttributeList,1),
-    ('alternativeTerm',None,asn1.TYPE(asn1.IMPLICIT(4,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE_OF (AttributesPlusTerm)),1),
-    ('globalOccurrences',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None)),1),
-    ('byAttributes',None,asn1.TYPE(asn1.IMPLICIT(3,cls=asn1.CONTEXT_FLAG),OccurrenceByAttributes),1),
-    ('otherTermInfo',None,OtherInformation,1)], seq_name = 'TermInfo')
 SearchResponse=asn1.SEQUENCE ([('referenceId',None,ReferenceId,1),
     ('resultCount',None,asn1.TYPE(asn1.IMPLICIT(23,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None)),0),
     ('numberOfRecordsReturned',None,asn1.TYPE(asn1.IMPLICIT(24,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None)),0),
@@ -279,6 +245,40 @@ SearchResponse=asn1.SEQUENCE ([('referenceId',None,ReferenceId,1),
     ('records',None,Records,1),
     ('additionalSearchInfo',None,asn1.TYPE(asn1.IMPLICIT(203,cls=asn1.CONTEXT_FLAG),OtherInformation),1),
     ('otherInfo',None,OtherInformation,1)], seq_name = 'SearchResponse')
+AttributeList=asn1.TYPE(asn1.IMPLICIT(44,cls=asn1.CONTEXT_FLAG),asn1.SEQUENCE_OF (AttributeElement))
+PresentResponse=asn1.SEQUENCE ([('referenceId',None,ReferenceId,1),
+    ('numberOfRecordsReturned',None,asn1.TYPE(asn1.IMPLICIT(24,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None)),0),
+    ('nextResultSetPosition',None,asn1.TYPE(asn1.IMPLICIT(25,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None)),0),
+    ('presentStatus',None,PresentStatus,0),
+    ('records',None,Records,1),
+    ('otherInfo',None,OtherInformation,1)], seq_name = 'PresentResponse')
+AttributesPlusTerm=asn1.TYPE(asn1.IMPLICIT(102,cls=asn1.CONTEXT_FLAG),asn1.SEQUENCE ([('attributes',None,AttributeList,0),
+    ('term',None,Term,0)], seq_name = 'AttributesPlusTerm'))
+SortKey=asn1.CHOICE ([('privateSortKey',None,asn1.TYPE(asn1.IMPLICIT(0,cls=asn1.CONTEXT_FLAG),InternationalString)),
+    ('elementSpec',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),Specification)),
+    ('sortAttributes',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE ([('id',None,AttributeSetId,0),
+        ('list',None,AttributeList,0)], seq_name = None)))])
+OccurrenceByAttributes=asn1.SEQUENCE_OF (asn1.SEQUENCE ([('attributes',None,asn1.TYPE(asn1.EXPLICIT(1,cls=asn1.CONTEXT_FLAG),AttributeList),0),
+    ('occurrences',None,    asn1.CHOICE ([('global',None,asn1.TYPE(asn1.EXPLICIT(2,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None))),
+        ('byDatabase',None,asn1.TYPE(asn1.IMPLICIT(3,cls=asn1.CONTEXT_FLAG),        asn1.SEQUENCE_OF (        asn1.SEQUENCE ([('db',None,DatabaseName,0),
+            ('num',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None)),1),
+            ('otherDbInfo',None,OtherInformation,1)], seq_name = None))))]),1),
+    ('otherOccurInfo',None,OtherInformation,1)], seq_name = None))
+ResultSetPlusAttributes=asn1.TYPE(asn1.IMPLICIT(214,cls=asn1.CONTEXT_FLAG),asn1.SEQUENCE ([('resultSet',None,ResultSetId,0),
+    ('attributes',None,AttributeList,0)], seq_name = 'ResultSetPlusAttributes'))
+SortElement=asn1.CHOICE ([('generic',None,asn1.TYPE(asn1.EXPLICIT(1,cls=asn1.CONTEXT_FLAG),SortKey)),
+    ('datbaseSpecific',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE_OF (    asn1.SEQUENCE ([('databaseName',None,DatabaseName,0),
+        ('dbSort',None,SortKey,0)], seq_name = None))))])
+TermInfo=asn1.SEQUENCE ([('term',None,Term,0),
+    ('displayTerm',None,asn1.TYPE(asn1.IMPLICIT(0,cls=asn1.CONTEXT_FLAG),InternationalString),1),
+    ('suggestedAttributes',None,AttributeList,1),
+    ('alternativeTerm',None,asn1.TYPE(asn1.IMPLICIT(4,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE_OF (AttributesPlusTerm)),1),
+    ('globalOccurrences',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None)),1),
+    ('byAttributes',None,asn1.TYPE(asn1.IMPLICIT(3,cls=asn1.CONTEXT_FLAG),OccurrenceByAttributes),1),
+    ('otherTermInfo',None,OtherInformation,1)], seq_name = 'TermInfo')
+Operand=asn1.CHOICE ([('attrTerm',None,AttributesPlusTerm),
+    ('resultSet',None,ResultSetId),
+    ('resultAttr',None,ResultSetPlusAttributes)])
 Entry=asn1.CHOICE ([('termInfo',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),TermInfo)),
     ('surrogateDiagnostic',None,asn1.TYPE(asn1.EXPLICIT(2,cls=asn1.CONTEXT_FLAG),DiagRec))])
 RPNStructure=asn1.CHOICE ([('op',None,asn1.TYPE(asn1.EXPLICIT(0,cls=asn1.CONTEXT_FLAG),Operand)),
@@ -291,17 +291,12 @@ ScanRequest=asn1.SEQUENCE ([('referenceId',None,ReferenceId,1),
     ('numberOfTermsRequested',None,asn1.TYPE(asn1.IMPLICIT(6,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None)),0),
     ('preferredPositionInResponse',None,asn1.TYPE(asn1.IMPLICIT(7,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None)),1),
     ('otherInfo',None,OtherInformation,1)], seq_name = 'ScanRequest')
-PresentResponse=asn1.SEQUENCE ([('referenceId',None,ReferenceId,1),
-    ('numberOfRecordsReturned',None,asn1.TYPE(asn1.IMPLICIT(24,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None)),0),
-    ('nextResultSetPosition',None,asn1.TYPE(asn1.IMPLICIT(25,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None)),0),
-    ('presentStatus',None,PresentStatus,0),
-    ('records',None,Records,1),
-    ('otherInfo',None,OtherInformation,1)], seq_name = 'PresentResponse')
-SortRequest=asn1.SEQUENCE ([('referenceId',None,ReferenceId,1),
-    ('inputResultSetNames',None,asn1.TYPE(asn1.IMPLICIT(3,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE_OF (InternationalString)),0),
-    ('sortedResultSetName',None,asn1.TYPE(asn1.IMPLICIT(4,cls=asn1.CONTEXT_FLAG),InternationalString),0),
-    ('sortSequence',None,asn1.TYPE(asn1.IMPLICIT(5,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE_OF (SortKeySpec)),0),
-    ('otherInfo',None,OtherInformation,1)], seq_name = 'SortRequest')
+SortKeySpec=asn1.SEQUENCE ([('sortElement',None,SortElement,0),
+    ('sortRelation',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([('ascending',0),('descending',1),('ascendingByFrequency',3),('descendingByfrequency',4)],None,None)),0),
+    ('caseSensitivity',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([('caseSensitive',0),('caseInsensitive',1)],None,None)),0),
+    ('missingValueAction',None,asn1.TYPE(asn1.EXPLICIT(3,cls=asn1.CONTEXT_FLAG),    asn1.CHOICE ([('abort',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),asn1.NULL)),
+        ('null',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),asn1.NULL)),
+        ('missingValueData',None,asn1.TYPE(asn1.IMPLICIT(3,cls=asn1.CONTEXT_FLAG),asn1.OCTSTRING))])),1)], seq_name = 'SortKeySpec')
 ListEntries=asn1.SEQUENCE ([('entries',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE_OF (Entry)),1),
     ('nonsurrogateDiagnostics',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE_OF (DiagRec)),1)], seq_name = 'ListEntries')
 RPNQuery=asn1.SEQUENCE ([('attributeSet',None,AttributeSetId,0),
@@ -314,9 +309,11 @@ ScanResponse=asn1.SEQUENCE ([('referenceId',None,ReferenceId,1),
     ('entries',None,asn1.TYPE(asn1.IMPLICIT(7,cls=asn1.CONTEXT_FLAG),ListEntries),1),
     ('attributeSet',None,asn1.TYPE(asn1.IMPLICIT(8,cls=asn1.CONTEXT_FLAG),AttributeSetId),1),
     ('otherInfo',None,OtherInformation,1)], seq_name = 'ScanResponse')
-RpnRpnOp=asn1.SEQUENCE ([('rpn1',None,RPNStructure,0),
-    ('rpn2',None,RPNStructure,0),
-    ('op',None,Operator,0)], seq_name = 'RpnRpnOp')
+SortRequest=asn1.SEQUENCE ([('referenceId',None,ReferenceId,1),
+    ('inputResultSetNames',None,asn1.TYPE(asn1.IMPLICIT(3,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE_OF (InternationalString)),0),
+    ('sortedResultSetName',None,asn1.TYPE(asn1.IMPLICIT(4,cls=asn1.CONTEXT_FLAG),InternationalString),0),
+    ('sortSequence',None,asn1.TYPE(asn1.IMPLICIT(5,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE_OF (SortKeySpec)),0),
+    ('otherInfo',None,OtherInformation,1)], seq_name = 'SortRequest')
 Query=asn1.CHOICE ([('type_0',None,asn1.TYPE(asn1.EXPLICIT(0,cls=asn1.CONTEXT_FLAG),asn1.ANY)),
     ('type_1',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),RPNQuery)),
     ('type_2',None,asn1.TYPE(asn1.EXPLICIT(2,cls=asn1.CONTEXT_FLAG),asn1.OCTSTRING)),
@@ -324,6 +321,9 @@ Query=asn1.CHOICE ([('type_0',None,asn1.TYPE(asn1.EXPLICIT(0,cls=asn1.CONTEXT_FL
     ('type_101',None,asn1.TYPE(asn1.IMPLICIT(101,cls=asn1.CONTEXT_FLAG),RPNQuery)),
     ('type_102',None,asn1.TYPE(asn1.EXPLICIT(102,cls=asn1.CONTEXT_FLAG),asn1.OCTSTRING)),
     ('type_104',None,asn1.TYPE(asn1.IMPLICIT(104,cls=asn1.CONTEXT_FLAG),asn1.EXTERNAL))])
+RpnRpnOp=asn1.SEQUENCE ([('rpn1',None,RPNStructure,0),
+    ('rpn2',None,RPNStructure,0),
+    ('op',None,Operator,0)], seq_name = 'RpnRpnOp')
 SearchRequest=asn1.SEQUENCE ([('referenceId',None,ReferenceId,1),
     ('smallSetUpperBound',None,asn1.TYPE(asn1.IMPLICIT(13,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None)),0),
     ('largeSetLowerBound',None,asn1.TYPE(asn1.IMPLICIT(14,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None)),0),
@@ -412,8 +412,6 @@ AccessRestrictions=asn1.SEQUENCE_OF (asn1.SEQUENCE ([('accessType',None,asn1.TYP
     ('accessChallenges',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE_OF (asn1.OBJECT_IDENTIFIER)),1)], seq_name = None))
 SearchKey=asn1.SEQUENCE ([('searchKey',None,asn1.TYPE(asn1.IMPLICIT(0,cls=asn1.CONTEXT_FLAG),InternationalString),0),
     ('description',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),HumanString),1)], seq_name = 'SearchKey')
-ElementDataType=asn1.CHOICE ([('primitive',None,asn1.TYPE(asn1.IMPLICIT(0,cls=asn1.CONTEXT_FLAG),PrimitiveDataType)),
-    ('structured',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),asn1.NULL))])
 AttributeValue=asn1.SEQUENCE ([('value',None,asn1.TYPE(asn1.EXPLICIT(0,cls=asn1.CONTEXT_FLAG),StringOrNumeric),0),
     ('description',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),HumanString),1),
     ('subAttributes',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE_OF (StringOrNumeric)),1),
@@ -426,31 +424,8 @@ CommonInfo=asn1.SEQUENCE ([('dateAdded',None,asn1.TYPE(asn1.IMPLICIT(0,cls=asn1.
     ('expiry',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),asn1.GeneralizedTime),1),
     ('humanString_Language',None,asn1.TYPE(asn1.IMPLICIT(3,cls=asn1.CONTEXT_FLAG),LanguageCode),1),
     ('otherInfo',None,OtherInformation,1)], seq_name = 'CommonInfo')
-ElementInfo=asn1.SEQUENCE ([('elementName',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),InternationalString),0),
-    ('elementTagPath',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),Path),0),
-    ('dataType',None,asn1.TYPE(asn1.EXPLICIT(3,cls=asn1.CONTEXT_FLAG),ElementDataType),1),
-    ('required',None,asn1.TYPE(asn1.IMPLICIT(4,cls=asn1.CONTEXT_FLAG),asn1.BOOLEAN),0),
-    ('repeatable',None,asn1.TYPE(asn1.IMPLICIT(5,cls=asn1.CONTEXT_FLAG),asn1.BOOLEAN),0),
-    ('description',None,asn1.TYPE(asn1.IMPLICIT(6,cls=asn1.CONTEXT_FLAG),HumanString),1)], seq_name = 'ElementInfo')
-ExtendedServicesInfo=asn1.SEQUENCE ([('commonInfo',None,asn1.TYPE(asn1.IMPLICIT(0,cls=asn1.CONTEXT_FLAG),CommonInfo),1),
-    ('type',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),asn1.OBJECT_IDENTIFIER),0),
-    ('name',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),InternationalString),1),
-    ('privateType',None,asn1.TYPE(asn1.IMPLICIT(3,cls=asn1.CONTEXT_FLAG),asn1.BOOLEAN),0),
-    ('restrictionsApply',None,asn1.TYPE(asn1.IMPLICIT(5,cls=asn1.CONTEXT_FLAG),asn1.BOOLEAN),0),
-    ('feeApply',None,asn1.TYPE(asn1.IMPLICIT(6,cls=asn1.CONTEXT_FLAG),asn1.BOOLEAN),0),
-    ('available',None,asn1.TYPE(asn1.IMPLICIT(7,cls=asn1.CONTEXT_FLAG),asn1.BOOLEAN),0),
-    ('retentionSupported',None,asn1.TYPE(asn1.IMPLICIT(8,cls=asn1.CONTEXT_FLAG),asn1.BOOLEAN),0),
-    ('waitAction',None,asn1.TYPE(asn1.IMPLICIT(9,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([('waitSupported',1),('waitAlways',2),('waitNotSupported',3),('depends',4),('notSaying',5)],None,None)),0),
-    ('description',None,asn1.TYPE(asn1.IMPLICIT(10,cls=asn1.CONTEXT_FLAG),HumanString),1),
-    ('specificExplain',None,asn1.TYPE(asn1.IMPLICIT(11,cls=asn1.CONTEXT_FLAG),asn1.EXTERNAL),1),
-    ('esASN',None,asn1.TYPE(asn1.IMPLICIT(12,cls=asn1.CONTEXT_FLAG),InternationalString),1)], seq_name = 'ExtendedServicesInfo')
-RecordSyntaxInfo=asn1.SEQUENCE ([('commonInfo',None,asn1.TYPE(asn1.IMPLICIT(0,cls=asn1.CONTEXT_FLAG),CommonInfo),1),
-    ('recordSyntax',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),asn1.OBJECT_IDENTIFIER),0),
-    ('name',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),InternationalString),0),
-    ('transferSyntaxes',None,asn1.TYPE(asn1.IMPLICIT(3,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE_OF (asn1.OBJECT_IDENTIFIER)),1),
-    ('description',None,asn1.TYPE(asn1.IMPLICIT(4,cls=asn1.CONTEXT_FLAG),HumanString),1),
-    ('asn1Module',None,asn1.TYPE(asn1.IMPLICIT(5,cls=asn1.CONTEXT_FLAG),InternationalString),1),
-    ('abstractStructure',None,asn1.TYPE(asn1.IMPLICIT(6,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE_OF (ElementInfo)),1)], seq_name = 'RecordSyntaxInfo')
+ElementDataType=asn1.CHOICE ([('primitive',None,asn1.TYPE(asn1.IMPLICIT(0,cls=asn1.CONTEXT_FLAG),PrimitiveDataType)),
+    ('structured',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),asn1.NULL))])
 PrivateCapabilities=asn1.SEQUENCE ([('operators',None,asn1.TYPE(asn1.IMPLICIT(0,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE_OF (    asn1.SEQUENCE ([('operator',None,asn1.TYPE(asn1.IMPLICIT(0,cls=asn1.CONTEXT_FLAG),InternationalString),0),
         ('description',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),HumanString),1)], seq_name = None))),1),
     ('searchKeys',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE_OF (SearchKey)),1),
@@ -503,14 +478,18 @@ TagSetInfo=asn1.SEQUENCE ([('commonInfo',None,asn1.TYPE(asn1.IMPLICIT(0,cls=asn1
         ('description',None,asn1.TYPE(asn1.IMPLICIT(4,cls=asn1.CONTEXT_FLAG),HumanString),1),
         ('dataType',None,asn1.TYPE(asn1.EXPLICIT(5,cls=asn1.CONTEXT_FLAG),PrimitiveDataType),1),
         ('otherTagInfo',None,OtherInformation,1)], seq_name = None))),1)], seq_name = 'TagSetInfo')
-SchemaInfo=asn1.SEQUENCE ([('commonInfo',None,asn1.TYPE(asn1.IMPLICIT(0,cls=asn1.CONTEXT_FLAG),CommonInfo),1),
-    ('schema',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),asn1.OBJECT_IDENTIFIER),0),
-    ('name',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),InternationalString),0),
-    ('description',None,asn1.TYPE(asn1.IMPLICIT(3,cls=asn1.CONTEXT_FLAG),HumanString),1),
-    ('tagTypeMapping',None,asn1.TYPE(asn1.IMPLICIT(4,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE_OF (    asn1.SEQUENCE ([('tagType',None,asn1.TYPE(asn1.IMPLICIT(0,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None)),0),
-        ('tagSet',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),asn1.OBJECT_IDENTIFIER),1),
-        ('defaultTagType',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),asn1.NULL),1)], seq_name = None))),1),
-    ('recordStructure',None,asn1.TYPE(asn1.IMPLICIT(5,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE_OF (ElementInfo)),1)], seq_name = 'SchemaInfo')
+ExtendedServicesInfo=asn1.SEQUENCE ([('commonInfo',None,asn1.TYPE(asn1.IMPLICIT(0,cls=asn1.CONTEXT_FLAG),CommonInfo),1),
+    ('type',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),asn1.OBJECT_IDENTIFIER),0),
+    ('name',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),InternationalString),1),
+    ('privateType',None,asn1.TYPE(asn1.IMPLICIT(3,cls=asn1.CONTEXT_FLAG),asn1.BOOLEAN),0),
+    ('restrictionsApply',None,asn1.TYPE(asn1.IMPLICIT(5,cls=asn1.CONTEXT_FLAG),asn1.BOOLEAN),0),
+    ('feeApply',None,asn1.TYPE(asn1.IMPLICIT(6,cls=asn1.CONTEXT_FLAG),asn1.BOOLEAN),0),
+    ('available',None,asn1.TYPE(asn1.IMPLICIT(7,cls=asn1.CONTEXT_FLAG),asn1.BOOLEAN),0),
+    ('retentionSupported',None,asn1.TYPE(asn1.IMPLICIT(8,cls=asn1.CONTEXT_FLAG),asn1.BOOLEAN),0),
+    ('waitAction',None,asn1.TYPE(asn1.IMPLICIT(9,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([('waitSupported',1),('waitAlways',2),('waitNotSupported',3),('depends',4),('notSaying',5)],None,None)),0),
+    ('description',None,asn1.TYPE(asn1.IMPLICIT(10,cls=asn1.CONTEXT_FLAG),HumanString),1),
+    ('specificExplain',None,asn1.TYPE(asn1.IMPLICIT(11,cls=asn1.CONTEXT_FLAG),asn1.EXTERNAL),1),
+    ('esASN',None,asn1.TYPE(asn1.IMPLICIT(12,cls=asn1.CONTEXT_FLAG),InternationalString),1)], seq_name = 'ExtendedServicesInfo')
 AttributeCombinations=asn1.SEQUENCE ([('defaultAttributeSet',None,asn1.TYPE(asn1.IMPLICIT(0,cls=asn1.CONTEXT_FLAG),AttributeSetId),0),
     ('legalCombinations',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE_OF (AttributeCombination)),0)], seq_name = 'AttributeCombinations')
 Iso8777Capabilities=asn1.SEQUENCE ([('searchKeys',None,asn1.TYPE(asn1.IMPLICIT(0,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE_OF (SearchKey)),0),
@@ -521,16 +500,15 @@ VariantType=asn1.SEQUENCE ([('name',None,asn1.TYPE(asn1.IMPLICIT(0,cls=asn1.CONT
     ('description',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),HumanString),1),
     ('variantType',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None)),0),
     ('variantValue',None,asn1.TYPE(asn1.IMPLICIT(3,cls=asn1.CONTEXT_FLAG),VariantValue),1)], seq_name = 'VariantType')
+ElementInfo=asn1.SEQUENCE ([('elementName',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),InternationalString),0),
+    ('elementTagPath',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),Path),0),
+    ('dataType',None,asn1.TYPE(asn1.EXPLICIT(3,cls=asn1.CONTEXT_FLAG),ElementDataType),1),
+    ('required',None,asn1.TYPE(asn1.IMPLICIT(4,cls=asn1.CONTEXT_FLAG),asn1.BOOLEAN),0),
+    ('repeatable',None,asn1.TYPE(asn1.IMPLICIT(5,cls=asn1.CONTEXT_FLAG),asn1.BOOLEAN),0),
+    ('description',None,asn1.TYPE(asn1.IMPLICIT(6,cls=asn1.CONTEXT_FLAG),HumanString),1)], seq_name = 'ElementInfo')
 AttributeTypeDetails=asn1.SEQUENCE ([('attributeType',None,asn1.TYPE(asn1.IMPLICIT(0,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None)),0),
     ('defaultIfOmitted',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),OmittedAttributeInterpretation),1),
     ('attributeValues',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE_OF (AttributeValue)),1)], seq_name = 'AttributeTypeDetails')
-Costs=asn1.SEQUENCE ([('connectCharge',None,asn1.TYPE(asn1.IMPLICIT(0,cls=asn1.CONTEXT_FLAG),Charge),1),
-    ('connectTime',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),Charge),1),
-    ('displayCharge',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),Charge),1),
-    ('searchCharge',None,asn1.TYPE(asn1.IMPLICIT(3,cls=asn1.CONTEXT_FLAG),Charge),1),
-    ('subscriptCharge',None,asn1.TYPE(asn1.IMPLICIT(4,cls=asn1.CONTEXT_FLAG),Charge),1),
-    ('otherCharges',None,asn1.TYPE(asn1.IMPLICIT(5,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE_OF (    asn1.SEQUENCE ([('forWhat',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),HumanString),0),
-        ('charge',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),Charge),0)], seq_name = None))),1)], seq_name = 'Costs')
 AttributeSetInfo=asn1.SEQUENCE ([('commonInfo',None,asn1.TYPE(asn1.IMPLICIT(0,cls=asn1.CONTEXT_FLAG),CommonInfo),1),
     ('attributeSet',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),AttributeSetId),0),
     ('name',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),InternationalString),0),
@@ -550,6 +528,13 @@ RpnCapabilities=asn1.SEQUENCE ([('operators',None,asn1.TYPE(asn1.IMPLICIT(0,cls=
     ('resultSetAsOperandSupported',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),asn1.BOOLEAN),0),
     ('restrictionOperandSupported',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),asn1.BOOLEAN),0),
     ('proximity',None,asn1.TYPE(asn1.IMPLICIT(3,cls=asn1.CONTEXT_FLAG),ProximitySupport),1)], seq_name = 'RpnCapabilities')
+Costs=asn1.SEQUENCE ([('connectCharge',None,asn1.TYPE(asn1.IMPLICIT(0,cls=asn1.CONTEXT_FLAG),Charge),1),
+    ('connectTime',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),Charge),1),
+    ('displayCharge',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),Charge),1),
+    ('searchCharge',None,asn1.TYPE(asn1.IMPLICIT(3,cls=asn1.CONTEXT_FLAG),Charge),1),
+    ('subscriptCharge',None,asn1.TYPE(asn1.IMPLICIT(4,cls=asn1.CONTEXT_FLAG),Charge),1),
+    ('otherCharges',None,asn1.TYPE(asn1.IMPLICIT(5,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE_OF (    asn1.SEQUENCE ([('forWhat',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),HumanString),0),
+        ('charge',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),Charge),0)], seq_name = None))),1)], seq_name = 'Costs')
 VariantClass=asn1.SEQUENCE ([('name',None,asn1.TYPE(asn1.IMPLICIT(0,cls=asn1.CONTEXT_FLAG),InternationalString),1),
     ('description',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),HumanString),1),
     ('variantClass',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None)),0),
@@ -570,6 +555,21 @@ PerElementDetails=asn1.SEQUENCE ([('name',None,asn1.TYPE(asn1.IMPLICIT(0,cls=asn
     ('alternateNames',None,asn1.TYPE(asn1.IMPLICIT(16,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE_OF (InternationalString)),1),
     ('genericNames',None,asn1.TYPE(asn1.IMPLICIT(17,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE_OF (InternationalString)),1),
     ('searchAccess',None,asn1.TYPE(asn1.IMPLICIT(18,cls=asn1.CONTEXT_FLAG),AttributeCombinations),1)], seq_name = 'PerElementDetails')
+SchemaInfo=asn1.SEQUENCE ([('commonInfo',None,asn1.TYPE(asn1.IMPLICIT(0,cls=asn1.CONTEXT_FLAG),CommonInfo),1),
+    ('schema',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),asn1.OBJECT_IDENTIFIER),0),
+    ('name',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),InternationalString),0),
+    ('description',None,asn1.TYPE(asn1.IMPLICIT(3,cls=asn1.CONTEXT_FLAG),HumanString),1),
+    ('tagTypeMapping',None,asn1.TYPE(asn1.IMPLICIT(4,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE_OF (    asn1.SEQUENCE ([('tagType',None,asn1.TYPE(asn1.IMPLICIT(0,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None)),0),
+        ('tagSet',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),asn1.OBJECT_IDENTIFIER),1),
+        ('defaultTagType',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),asn1.NULL),1)], seq_name = None))),1),
+    ('recordStructure',None,asn1.TYPE(asn1.IMPLICIT(5,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE_OF (ElementInfo)),1)], seq_name = 'SchemaInfo')
+RecordSyntaxInfo=asn1.SEQUENCE ([('commonInfo',None,asn1.TYPE(asn1.IMPLICIT(0,cls=asn1.CONTEXT_FLAG),CommonInfo),1),
+    ('recordSyntax',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),asn1.OBJECT_IDENTIFIER),0),
+    ('name',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),InternationalString),0),
+    ('transferSyntaxes',None,asn1.TYPE(asn1.IMPLICIT(3,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE_OF (asn1.OBJECT_IDENTIFIER)),1),
+    ('description',None,asn1.TYPE(asn1.IMPLICIT(4,cls=asn1.CONTEXT_FLAG),HumanString),1),
+    ('asn1Module',None,asn1.TYPE(asn1.IMPLICIT(5,cls=asn1.CONTEXT_FLAG),InternationalString),1),
+    ('abstractStructure',None,asn1.TYPE(asn1.IMPLICIT(6,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE_OF (ElementInfo)),1)], seq_name = 'RecordSyntaxInfo')
 VariantSetInfo=asn1.SEQUENCE ([('commonInfo',None,asn1.TYPE(asn1.IMPLICIT(0,cls=asn1.CONTEXT_FLAG),CommonInfo),1),
     ('variantSet',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),asn1.OBJECT_IDENTIFIER),0),
     ('name',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),InternationalString),0),
@@ -711,8 +711,6 @@ SutrsRecord=InternationalString
 
 
 #module RecordSyntax_generic None
-Usage=asn1.SEQUENCE ([('type',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([('redistributable',1),('restricted',2),('licensePointer',3)],None,None)),0),
-    ('restriction',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),InternationalString),1)], seq_name = 'Usage')
 TagPath=asn1.SEQUENCE_OF (asn1.SEQUENCE ([('tagType',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None)),1),
     ('tagValue',None,asn1.TYPE(asn1.EXPLICIT(2,cls=asn1.CONTEXT_FLAG),StringOrNumeric),0),
     ('tagOccurrence',None,asn1.TYPE(asn1.IMPLICIT(3,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None)),1)], seq_name = None))
@@ -741,6 +739,8 @@ Variant=asn1.SEQUENCE ([('globalVariantSetId',None,asn1.TYPE(asn1.IMPLICIT(1,cls
             ('nul',None,asn1.NULL),
             ('unit',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),Unit)),
             ('valueAndUnit',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),IntUnit))])),0)], seq_name = None))),0)], seq_name = 'Variant')
+Usage=asn1.SEQUENCE ([('type',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([('redistributable',1),('restricted',2),('licensePointer',3)],None,None)),0),
+    ('restriction',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),InternationalString),1)], seq_name = 'Usage')
 Order=asn1.SEQUENCE ([('ascending',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),asn1.BOOLEAN),0),
     ('order',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None)),0)], seq_name = 'Order')
 HitVector=asn1.SEQUENCE ([('satisfier',None,Term,1),
@@ -939,10 +939,6 @@ ItemOrder=asn1.CHOICE ([('esRequest',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CON
 
 
 #module ESFormat_Update None
-ClientPartToKeep_upd=asn1.SEQUENCE ([('action',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([('recordInsert',1),('recordReplace',2),('recordDelete',3),('elementUpdate',4)],None,None)),0),
-    ('databaseName',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),InternationalString),0),
-    ('schema',None,asn1.TYPE(asn1.IMPLICIT(3,cls=asn1.CONTEXT_FLAG),asn1.OBJECT_IDENTIFIER),1),
-    ('elementSetName',None,asn1.TYPE(asn1.IMPLICIT(4,cls=asn1.CONTEXT_FLAG),InternationalString),1)], seq_name = 'ClientPartToKeep_upd')
 CorrelationInfo=asn1.SEQUENCE ([('note',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),InternationalString),1),
     ('id',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None)),1)], seq_name = 'CorrelationInfo')
 SuppliedRecords=asn1.SEQUENCE_OF (asn1.SEQUENCE ([('recordId',None,asn1.TYPE(asn1.EXPLICIT(1,cls=asn1.CONTEXT_FLAG),    asn1.CHOICE ([('number',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None))),
@@ -953,11 +949,15 @@ SuppliedRecords=asn1.SEQUENCE_OF (asn1.SEQUENCE ([('recordId',None,asn1.TYPE(asn
         ('previousVersion',None,asn1.TYPE(asn1.IMPLICIT(3,cls=asn1.CONTEXT_FLAG),asn1.EXTERNAL))])),1),
     ('correlationInfo',None,asn1.TYPE(asn1.IMPLICIT(3,cls=asn1.CONTEXT_FLAG),CorrelationInfo),1),
     ('record',None,asn1.TYPE(asn1.IMPLICIT(4,cls=asn1.CONTEXT_FLAG),asn1.EXTERNAL),0)], seq_name = None))
-ClientPartNotToKeep_upd=SuppliedRecords
+ClientPartToKeep_upd=asn1.SEQUENCE ([('action',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([('recordInsert',1),('recordReplace',2),('recordDelete',3),('elementUpdate',4)],None,None)),0),
+    ('databaseName',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),InternationalString),0),
+    ('schema',None,asn1.TYPE(asn1.IMPLICIT(3,cls=asn1.CONTEXT_FLAG),asn1.OBJECT_IDENTIFIER),1),
+    ('elementSetName',None,asn1.TYPE(asn1.IMPLICIT(4,cls=asn1.CONTEXT_FLAG),InternationalString),1)], seq_name = 'ClientPartToKeep_upd')
 TaskPackageRecordStructure=asn1.SEQUENCE ([('recordOrSurDiag',None,asn1.TYPE(asn1.EXPLICIT(1,cls=asn1.CONTEXT_FLAG),    asn1.CHOICE ([('record',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),asn1.EXTERNAL)),
         ('diagnostic',None,asn1.TYPE(asn1.EXPLICIT(2,cls=asn1.CONTEXT_FLAG),DiagRec))])),1),
     ('correlationInfo',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),CorrelationInfo),1),
     ('recordStatus',None,asn1.TYPE(asn1.IMPLICIT(3,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([('success',1),('queued',2),('inProcess',3),('failure',4)],None,None)),0)], seq_name = 'TaskPackageRecordStructure')
+ClientPartNotToKeep_upd=SuppliedRecords
 ServerPart_upd=asn1.SEQUENCE ([('updateStatus',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([('success',1),('partial',2),('failure',3)],None,None)),0),
     ('globalDiagnostics',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE_OF (DiagRec)),1),
     ('taskPackageRecords',None,asn1.TYPE(asn1.IMPLICIT(3,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE_OF (TaskPackageRecordStructure)),0)], seq_name = 'ServerPart_upd')
@@ -1050,7 +1050,7 @@ Espec_q_RPNStructure['rpnRpnOp'] =  ('rpnRpnOp', 1, Espec_q_RpnRpnOp)
 
 
 #!/usr/bin/env python
-# Auto-generated from auth_file_info.asn at Mon, 26 Jul 2004 17:30:20 +0000
+# Auto-generated from auth_file_info.asn at Wed, 26 Sep 2018 04:22:42 +0000
 from PyZ3950 import asn1
 #module UserInfoFormat_authorityFileInfo None
 AuthorityFileInfo=asn1.SEQUENCE ([('name',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),HumanString),0),
@@ -1059,15 +1059,15 @@ AuthorityFileInfo=asn1.SEQUENCE ([('name',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn
 
 
 #!/usr/bin/env python
-# Auto-generated from charset_1.asn at Mon, 26 Jul 2004 17:30:20 +0000
+# Auto-generated from charset_1.asn at Wed, 26 Sep 2018 04:22:42 +0000
 from PyZ3950 import asn1
 #module UserInfoFormat_charSetandLanguageNegotiation_1 None
+LeftAndRight=asn1.SEQUENCE ([('gLeft',None,asn1.TYPE(asn1.IMPLICIT(3,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([('g0',0),('g1',1),('g2',2),('g3',3)],None,None)),0),
+    ('gRight',None,asn1.TYPE(asn1.IMPLICIT(4,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([('g1',1),('g2',2),('g3',3)],None,None)),0)], seq_name = 'LeftAndRight')
 Environment=asn1.CHOICE ([('sevenBit',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),asn1.NULL)),
     ('eightBit',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),asn1.NULL))])
 Iso10646=asn1.SEQUENCE ([('collections',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),asn1.OBJECT_IDENTIFIER),0),
     ('encodingLevel',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),asn1.OBJECT_IDENTIFIER),0)], seq_name = 'Iso10646')
-LeftAndRight=asn1.SEQUENCE ([('gLeft',None,asn1.TYPE(asn1.IMPLICIT(3,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([('g0',0),('g1',1),('g2',2),('g3',3)],None,None)),0),
-    ('gRight',None,asn1.TYPE(asn1.IMPLICIT(4,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([('g1',1),('g2',2),('g3',3)],None,None)),0)], seq_name = 'LeftAndRight')
 LanguageCode1=asn1.GeneralString
 PrivateCharacterSet=asn1.CHOICE ([('viaOid',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE_OF (asn1.OBJECT_IDENTIFIER))),
     ('externallySpecified',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),asn1.EXTERNAL)),
@@ -1102,9 +1102,16 @@ CharSetandLanguageNegotiation=asn1.CHOICE ([('proposal',None,asn1.TYPE(asn1.IMPL
 
 
 #!/usr/bin/env python
-# Auto-generated from charset_2.asn at Mon, 26 Jul 2004 17:30:20 +0000
+# Auto-generated from charset_2.asn at Wed, 26 Sep 2018 04:22:42 +0000
 from PyZ3950 import asn1
 #module NegotiationRecordDefinition_charSetandLanguageNegotiation_2 None
+LeftAndRight_2=asn1.SEQUENCE ([('gLeft',None,asn1.TYPE(asn1.IMPLICIT(3,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([('g0',0),('g1',1),('g2',2),('g3',3)],None,None)),0),
+    ('gRight',None,asn1.TYPE(asn1.IMPLICIT(4,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([('g1',1),('g2',2),('g3',3)],None,None)),1)], seq_name = 'LeftAndRight_2')
+PrivateCharacterSet2=asn1.CHOICE ([('viaOid',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE_OF (asn1.OBJECT_IDENTIFIER))),
+    ('externallySpecified',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),asn1.EXTERNAL)),
+    ('previouslyAgreedUpon',None,asn1.TYPE(asn1.IMPLICIT(3,cls=asn1.CONTEXT_FLAG),asn1.NULL))])
+Environment_2=asn1.CHOICE ([('sevenBit',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),asn1.NULL)),
+    ('eightBit',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),asn1.NULL))])
 InitialSet_2=asn1.SEQUENCE ([('g0',None,asn1.TYPE(asn1.IMPLICIT(0,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None)),1),
     ('g1',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None)),1),
     ('g2',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None)),1),
@@ -1112,15 +1119,6 @@ InitialSet_2=asn1.SEQUENCE ([('g0',None,asn1.TYPE(asn1.IMPLICIT(0,cls=asn1.CONTE
     ('c0',None,asn1.TYPE(asn1.IMPLICIT(4,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None)),0),
     ('c1',None,asn1.TYPE(asn1.IMPLICIT(5,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None)),1)], seq_name = 'InitialSet_2')
 LanguageCode2=asn1.GeneralString
-LeftAndRight_2=asn1.SEQUENCE ([('gLeft',None,asn1.TYPE(asn1.IMPLICIT(3,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([('g0',0),('g1',1),('g2',2),('g3',3)],None,None)),0),
-    ('gRight',None,asn1.TYPE(asn1.IMPLICIT(4,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([('g1',1),('g2',2),('g3',3)],None,None)),1)], seq_name = 'LeftAndRight_2')
-PrivateCharacterSet2=asn1.CHOICE ([('viaOid',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE_OF (asn1.OBJECT_IDENTIFIER))),
-    ('externallySpecified',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),asn1.EXTERNAL)),
-    ('previouslyAgreedUpon',None,asn1.TYPE(asn1.IMPLICIT(3,cls=asn1.CONTEXT_FLAG),asn1.NULL))])
-Iso10646_2=asn1.SEQUENCE ([('collections',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),asn1.OBJECT_IDENTIFIER),0),
-    ('encodingLevel',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),asn1.OBJECT_IDENTIFIER),0)], seq_name = 'Iso10646_2')
-Environment_2=asn1.CHOICE ([('sevenBit',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),asn1.NULL)),
-    ('eightBit',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),asn1.NULL))])
 Iso2022_2=asn1.CHOICE ([('originProposal',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE ([('proposedEnvironment',None,asn1.TYPE(asn1.EXPLICIT(0,cls=asn1.CONTEXT_FLAG),Environment_2),1),
         ('proposedSets',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),        asn1.SEQUENCE_OF (asn1.INTEGER_class ([],None,None))),0),
         ('proposedInitialSets',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),        asn1.SEQUENCE_OF (InitialSet_2)),0),
@@ -1129,39 +1127,43 @@ Iso2022_2=asn1.CHOICE ([('originProposal',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn
         ('selectedSets',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),        asn1.SEQUENCE_OF (asn1.INTEGER_class ([],None,None))),0),
         ('selectedinitialSet',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),InitialSet_2),0),
         ('selectedLeftAndRight',None,asn1.TYPE(asn1.IMPLICIT(3,cls=asn1.CONTEXT_FLAG),LeftAndRight_2),0)], seq_name = None)))])
+Iso10646_2=asn1.SEQUENCE ([('collections',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),asn1.OBJECT_IDENTIFIER),0),
+    ('encodingLevel',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),asn1.OBJECT_IDENTIFIER),0)], seq_name = 'Iso10646_2')
+OriginProposal2=asn1.SEQUENCE ([('proposedCharSets',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE_OF (    asn1.CHOICE ([('iso2022',None,asn1.TYPE(asn1.EXPLICIT(1,cls=asn1.CONTEXT_FLAG),Iso2022_2)),
+        ('iso10646',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),Iso10646_2)),
+        ('private',None,asn1.TYPE(asn1.EXPLICIT(3,cls=asn1.CONTEXT_FLAG),PrivateCharacterSet2))]))),1),
+    ('proposedlanguages',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE_OF (LanguageCode2)),1),
+    ('recordsInSelectedCharSets',None,asn1.TYPE(asn1.IMPLICIT(3,cls=asn1.CONTEXT_FLAG),asn1.BOOLEAN),1)], seq_name = 'OriginProposal2')
 TargetResponse2=asn1.SEQUENCE ([('selectedCharSets',None,asn1.TYPE(asn1.EXPLICIT(1,cls=asn1.CONTEXT_FLAG),    asn1.CHOICE ([('iso2022',None,asn1.TYPE(asn1.EXPLICIT(1,cls=asn1.CONTEXT_FLAG),Iso2022_2)),
         ('iso10646',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),Iso10646_2)),
         ('private',None,asn1.TYPE(asn1.EXPLICIT(3,cls=asn1.CONTEXT_FLAG),PrivateCharacterSet2)),
         ('none',None,asn1.TYPE(asn1.IMPLICIT(4,cls=asn1.CONTEXT_FLAG),asn1.NULL))])),1),
     ('selectedLanguage',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),LanguageCode2),1),
     ('recordsInSelectedCharSets',None,asn1.TYPE(asn1.IMPLICIT(3,cls=asn1.CONTEXT_FLAG),asn1.BOOLEAN),1)], seq_name = 'TargetResponse2')
-OriginProposal2=asn1.SEQUENCE ([('proposedCharSets',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE_OF (    asn1.CHOICE ([('iso2022',None,asn1.TYPE(asn1.EXPLICIT(1,cls=asn1.CONTEXT_FLAG),Iso2022_2)),
-        ('iso10646',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),Iso10646_2)),
-        ('private',None,asn1.TYPE(asn1.EXPLICIT(3,cls=asn1.CONTEXT_FLAG),PrivateCharacterSet2))]))),1),
-    ('proposedlanguages',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE_OF (LanguageCode2)),1),
-    ('recordsInSelectedCharSets',None,asn1.TYPE(asn1.IMPLICIT(3,cls=asn1.CONTEXT_FLAG),asn1.BOOLEAN),1)], seq_name = 'OriginProposal2')
 CharSetandLanguageNegotiation2=asn1.CHOICE ([('proposal',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),OriginProposal2)),
     ('response',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),TargetResponse2))])
 
 
 #!/usr/bin/env python
-# Auto-generated from charset_3.asn at Mon, 26 Jul 2004 17:30:21 +0000
+# Auto-generated from charset_3.asn at Wed, 26 Sep 2018 04:22:42 +0000
 from PyZ3950 import asn1
 #module NegotiationRecordDefinition_charSetandLanguageNegotiation_3 None
-Environment_3=asn1.CHOICE ([('sevenBit',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),asn1.NULL)),
-    ('eightBit',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),asn1.NULL))])
-LeftAndRight_3=asn1.SEQUENCE ([('gLeft',None,asn1.TYPE(asn1.IMPLICIT(3,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([('g0',0),('g1',1),('g2',2),('g3',3)],None,None)),0),
-    ('gRight',None,asn1.TYPE(asn1.IMPLICIT(4,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([('g1',1),('g2',2),('g3',3)],None,None)),1)], seq_name = 'LeftAndRight_3')
 InitialSet_3=asn1.SEQUENCE ([('g0',None,asn1.TYPE(asn1.IMPLICIT(0,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None)),1),
     ('g1',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None)),1),
     ('g2',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None)),1),
     ('g3',None,asn1.TYPE(asn1.IMPLICIT(3,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None)),1),
     ('c0',None,asn1.TYPE(asn1.IMPLICIT(4,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None)),0),
     ('c1',None,asn1.TYPE(asn1.IMPLICIT(5,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None)),1)], seq_name = 'InitialSet_3')
-LanguageCode3=asn1.GeneralString
+LeftAndRight_3=asn1.SEQUENCE ([('gLeft',None,asn1.TYPE(asn1.IMPLICIT(3,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([('g0',0),('g1',1),('g2',2),('g3',3)],None,None)),0),
+    ('gRight',None,asn1.TYPE(asn1.IMPLICIT(4,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([('g1',1),('g2',2),('g3',3)],None,None)),1)], seq_name = 'LeftAndRight_3')
+Iso10646_3=asn1.SEQUENCE ([('collections',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),asn1.OBJECT_IDENTIFIER),1),
+    ('encodingLevel',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),asn1.OBJECT_IDENTIFIER),0)], seq_name = 'Iso10646_3')
+Environment_3=asn1.CHOICE ([('sevenBit',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),asn1.NULL)),
+    ('eightBit',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),asn1.NULL))])
 PrivateCharacterSet_3=asn1.CHOICE ([('viaOid',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE_OF (asn1.OBJECT_IDENTIFIER))),
     ('externallySpecified',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),asn1.EXTERNAL)),
     ('previouslyAgreedUpon',None,asn1.TYPE(asn1.IMPLICIT(3,cls=asn1.CONTEXT_FLAG),asn1.NULL))])
+LanguageCode3=asn1.GeneralString
 Iso2022_3=asn1.CHOICE ([('originProposal',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE ([('proposedEnvironment',None,asn1.TYPE(asn1.EXPLICIT(0,cls=asn1.CONTEXT_FLAG),Environment_3),1),
         ('proposedSets',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),        asn1.SEQUENCE_OF (asn1.INTEGER_class ([],None,None))),0),
         ('proposedInitialSets',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),        asn1.SEQUENCE_OF (InitialSet_3)),0),
@@ -1170,8 +1172,6 @@ Iso2022_3=asn1.CHOICE ([('originProposal',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn
         ('selectedSets',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),        asn1.SEQUENCE_OF (asn1.INTEGER_class ([],None,None))),0),
         ('selectedinitialSet',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),InitialSet_3),0),
         ('selectedLeftAndRight',None,asn1.TYPE(asn1.IMPLICIT(3,cls=asn1.CONTEXT_FLAG),LeftAndRight_3),0)], seq_name = None)))])
-Iso10646_3=asn1.SEQUENCE ([('collections',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),asn1.OBJECT_IDENTIFIER),1),
-    ('encodingLevel',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),asn1.OBJECT_IDENTIFIER),0)], seq_name = 'Iso10646_3')
 TargetResponse_3=asn1.SEQUENCE ([('selectedCharSets',None,asn1.TYPE(asn1.EXPLICIT(1,cls=asn1.CONTEXT_FLAG),    asn1.CHOICE ([('iso2022',None,asn1.TYPE(asn1.EXPLICIT(1,cls=asn1.CONTEXT_FLAG),Iso2022_3)),
         ('iso10646',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),Iso10646_3)),
         ('private',None,asn1.TYPE(asn1.EXPLICIT(3,cls=asn1.CONTEXT_FLAG),PrivateCharacterSet_3)),
@@ -1188,7 +1188,7 @@ CharSetandLanguageNegotiation_3=asn1.CHOICE ([('proposal',None,asn1.TYPE(asn1.IM
 
 
 #!/usr/bin/env python
-# Auto-generated from edit_replace_qual.asn at Mon, 26 Jul 2004 17:30:21 +0000
+# Auto-generated from edit_replace_qual.asn at Wed, 26 Sep 2018 04:22:42 +0000
 from PyZ3950 import asn1
 #module ERAQ None
 EditReplaceActionQualifier=asn1.SEQUENCE ([('persistentResultSetPackageName',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),InternationalString),0),
@@ -1208,7 +1208,7 @@ EditReplaceActionQualifier=asn1.SEQUENCE ([('persistentResultSetPackageName',Non
 
 
 #!/usr/bin/env python
-# Auto-generated from frag.asn at Mon, 26 Jul 2004 17:30:21 +0000
+# Auto-generated from frag.asn at Wed, 26 Sep 2018 04:22:42 +0000
 from PyZ3950 import asn1
 #module FragmentSyntax None
 Fragment=asn1.SEQUENCE ([('realSyntax',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),asn1.OBJECT_IDENTIFIER),1),
@@ -1217,7 +1217,7 @@ Fragment=asn1.SEQUENCE ([('realSyntax',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.C
 
 
 #!/usr/bin/env python
-# Auto-generated from ins_qualifier.asn at Mon, 26 Jul 2004 17:30:21 +0000
+# Auto-generated from ins_qualifier.asn at Wed, 26 Sep 2018 04:22:42 +0000
 from PyZ3950 import asn1
 #module RIAQ None
 RecordInsertActionQualifier=asn1.SEQUENCE ([('idsOrCode',None,asn1.TYPE(asn1.EXPLICIT(1,cls=asn1.CONTEXT_FLAG),    asn1.CHOICE ([('nonDupRecordIds',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),        asn1.SEQUENCE_OF (InternationalString))),
@@ -1226,14 +1226,14 @@ RecordInsertActionQualifier=asn1.SEQUENCE ([('idsOrCode',None,asn1.TYPE(asn1.EXP
 
 
 #!/usr/bin/env python
-# Auto-generated from multiple_search_term_1.asn at Mon, 26 Jul 2004 17:30:21 +0000
+# Auto-generated from multiple_search_term_1.asn at Wed, 26 Sep 2018 04:22:42 +0000
 from PyZ3950 import asn1
 #module UserInfoFormat_multipleSearchTerms_1 None
 MultipleSearchTerms_1=asn1.SEQUENCE_OF (Term)
 
 
 #!/usr/bin/env python
-# Auto-generated from multiple_search_term_2.asn at Mon, 26 Jul 2004 17:30:21 +0000
+# Auto-generated from multiple_search_term_2.asn at Wed, 26 Sep 2018 04:22:42 +0000
 from PyZ3950 import asn1
 #module UserInfoFormat_multipleSearchTerms_2 None
 MultipleSearchTerms_2=asn1.SEQUENCE_OF (asn1.SEQUENCE ([('term',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),Term),0),
@@ -1241,7 +1241,7 @@ MultipleSearchTerms_2=asn1.SEQUENCE_OF (asn1.SEQUENCE ([('term',None,asn1.TYPE(a
 
 
 #!/usr/bin/env python
-# Auto-generated from negot_es_size.asn at Mon, 26 Jul 2004 17:30:21 +0000
+# Auto-generated from negot_es_size.asn at Wed, 26 Sep 2018 04:22:42 +0000
 from PyZ3950 import asn1
 #module NegotiationRecordDefinition_NegotiateEsSizes None
 NegotiateEsSizes=asn1.SEQUENCE ([('maxMsgSize',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None)),1),
@@ -1250,7 +1250,7 @@ NegotiateEsSizes=asn1.SEQUENCE ([('maxMsgSize',None,asn1.TYPE(asn1.IMPLICIT(1,cl
 
 
 #!/usr/bin/env python
-# Auto-generated from oclc.asn at Mon, 26 Jul 2004 17:30:21 +0000
+# Auto-generated from oclc.asn at Wed, 26 Sep 2018 04:22:42 +0000
 from PyZ3950 import asn1
 #module UserInfoFormat_OCLC_Info None
 DBName=asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),asn1.VisibleString)
@@ -1261,7 +1261,7 @@ OCLC_UserInformation=asn1.SEQUENCE ([('motd',None,asn1.TYPE(asn1.IMPLICIT(1,cls=
 
 
 #!/usr/bin/env python
-# Auto-generated from opac.asn at Mon, 26 Jul 2004 17:30:21 +0000
+# Auto-generated from opac.asn at Wed, 26 Sep 2018 04:22:42 +0000
 from PyZ3950 import asn1
 #module RecordSyntax_opac None
 Volume=asn1.SEQUENCE ([('enumeration',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),InternationalString),1),
@@ -1303,11 +1303,9 @@ OPACRecord=asn1.SEQUENCE ([('bibliographicRecord',None,asn1.TYPE(asn1.IMPLICIT(1
 
 
 #!/usr/bin/env python
-# Auto-generated from update_es_rev1.asn at Mon, 26 Jul 2004 17:30:21 +0000
+# Auto-generated from update_es_rev1.asn at Wed, 26 Sep 2018 04:22:42 +0000
 from PyZ3950 import asn1
 #module ESFormat_Update None
-CorrelationInfo_updrev1=asn1.SEQUENCE ([('note',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),InternationalString),1),
-    ('id',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None)),1)], seq_name = 'CorrelationInfo_updrev1')
 OriginPartToKeep_updrev1=asn1.SEQUENCE ([('action',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([('recordInsert',1),('recordReplace',2),('recordDelete',3),('elementUpdate',4),('specialUpdate',5)],None,None)),0),
     ('databaseName',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),InternationalString),0),
     ('schema',None,asn1.TYPE(asn1.IMPLICIT(3,cls=asn1.CONTEXT_FLAG),asn1.OBJECT_IDENTIFIER),1),
@@ -1316,11 +1314,8 @@ OriginPartToKeep_updrev1=asn1.SEQUENCE ([('action',None,asn1.TYPE(asn1.IMPLICIT(
 TargetPart_updrev1=asn1.SEQUENCE ([('updateStatus',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([('success',1),('partial',2),('failure',3)],None,None)),0),
     ('globalDiagnostics',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE_OF (DiagRec)),1),
     ('taskPackageRecords',None,asn1.TYPE(asn1.IMPLICIT(3,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE_OF (TaskPackageRecordStructure)),0)], seq_name = 'TargetPart_updrev1')
-TaskPackageRecordStructure_updrev1=asn1.SEQUENCE ([('recordOrSurDiag',None,asn1.TYPE(asn1.EXPLICIT(1,cls=asn1.CONTEXT_FLAG),    asn1.CHOICE ([('record',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),asn1.EXTERNAL)),
-        ('surrogateDiagnostics',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),        asn1.SEQUENCE_OF (DiagRec)))])),1),
-    ('correlationInfo',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),CorrelationInfo_updrev1),1),
-    ('recordStatus',None,asn1.TYPE(asn1.IMPLICIT(3,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([('success',1),('queued',2),('inProcess',3),('failure',4)],None,None)),0),
-    ('supplementalDiagnostics',None,asn1.TYPE(asn1.IMPLICIT(4,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE_OF (DiagRec)),1)], seq_name = 'TaskPackageRecordStructure_updrev1')
+CorrelationInfo_updrev1=asn1.SEQUENCE ([('note',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),InternationalString),1),
+    ('id',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None)),1)], seq_name = 'CorrelationInfo_updrev1')
 SuppliedRecords_updrev1=asn1.SEQUENCE_OF (asn1.SEQUENCE ([('recordId',None,asn1.TYPE(asn1.EXPLICIT(1,cls=asn1.CONTEXT_FLAG),    asn1.CHOICE ([('number',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None))),
         ('string',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),InternationalString)),
         ('opaque',None,asn1.TYPE(asn1.IMPLICIT(3,cls=asn1.CONTEXT_FLAG),asn1.OCTSTRING))])),1),
@@ -1329,6 +1324,11 @@ SuppliedRecords_updrev1=asn1.SEQUENCE_OF (asn1.SEQUENCE ([('recordId',None,asn1.
         ('previousVersion',None,asn1.TYPE(asn1.IMPLICIT(3,cls=asn1.CONTEXT_FLAG),asn1.EXTERNAL))])),1),
     ('correlationInfo',None,asn1.TYPE(asn1.IMPLICIT(3,cls=asn1.CONTEXT_FLAG),CorrelationInfo_updrev1),1),
     ('record',None,asn1.TYPE(asn1.IMPLICIT(4,cls=asn1.CONTEXT_FLAG),asn1.EXTERNAL),0)], seq_name = None))
+TaskPackageRecordStructure_updrev1=asn1.SEQUENCE ([('recordOrSurDiag',None,asn1.TYPE(asn1.EXPLICIT(1,cls=asn1.CONTEXT_FLAG),    asn1.CHOICE ([('record',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),asn1.EXTERNAL)),
+        ('surrogateDiagnostics',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),        asn1.SEQUENCE_OF (DiagRec)))])),1),
+    ('correlationInfo',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),CorrelationInfo_updrev1),1),
+    ('recordStatus',None,asn1.TYPE(asn1.IMPLICIT(3,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([('success',1),('queued',2),('inProcess',3),('failure',4)],None,None)),0),
+    ('supplementalDiagnostics',None,asn1.TYPE(asn1.IMPLICIT(4,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE_OF (DiagRec)),1)], seq_name = 'TaskPackageRecordStructure_updrev1')
 OriginPartNotToKeep_updrev1=SuppliedRecords_updrev1
 Update_updrev1=asn1.CHOICE ([('esRequest',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE ([('toKeep',None,asn1.TYPE(asn1.EXPLICIT(1,cls=asn1.CONTEXT_FLAG),OriginPartToKeep_updrev1),0),
         ('notToKeep',None,asn1.TYPE(asn1.EXPLICIT(2,cls=asn1.CONTEXT_FLAG),OriginPartNotToKeep_updrev1),0)], seq_name = None))),
@@ -1337,7 +1337,7 @@ Update_updrev1=asn1.CHOICE ([('esRequest',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn
 
 
 #!/usr/bin/env python
-# Auto-generated from zsql.asn at Mon, 26 Jul 2004 17:30:22 +0000
+# Auto-generated from zsql.asn at Wed, 26 Sep 2018 04:22:42 +0000
 from PyZ3950 import asn1
 #module Z39_50_EXTERNALS_SQL_RS None
 SQLCharacterSetClause=asn1.SEQUENCE ([('characterSetCatalog',None,asn1.TYPE(asn1.IMPLICIT(0,cls=asn1.CONTEXT_FLAG),InternationalString),1),
@@ -1347,15 +1347,15 @@ SQLUniqueConstraint=asn1.INTEGER_class ([('unique',1),('primaryKey',2)],None,Non
 SQLTransformDescriptor=asn1.SEQUENCE ([('groupName',None,asn1.TYPE(asn1.IMPLICIT(0,cls=asn1.CONTEXT_FLAG),InternationalString),0),
     ('fromSQLFunctionName',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),InternationalString),1),
     ('toSQLFunctionName',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),InternationalString),1)], seq_name = 'SQLTransformDescriptor')
+SQLOrderingDescriptor=asn1.SEQUENCE ([('orderingForm',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([('equals',1),('full',2),('none',3)],None,None)),0),
+    ('orderingCategory',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),    asn1.CHOICE ([('relativeRoutineName',None,asn1.TYPE(asn1.IMPLICIT(0,cls=asn1.CONTEXT_FLAG),InternationalString)),
+        ('hashRoutineName',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),InternationalString)),
+        ('stateRoutineName',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),InternationalString))])),0)], seq_name = 'SQLOrderingDescriptor')
 Z3950CharacterSetLanguageClause=asn1.SEQUENCE ([('characterSet',None,asn1.TYPE(asn1.EXPLICIT(0,cls=asn1.CONTEXT_FLAG),    asn1.CHOICE ([('iso2022',None,asn1.TYPE(asn1.EXPLICIT(1,cls=asn1.CONTEXT_FLAG),Iso2022)),
         ('iso10646',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),Iso10646)),
         ('private',None,asn1.TYPE(asn1.EXPLICIT(3,cls=asn1.CONTEXT_FLAG),PrivateCharacterSet)),
         ('none',None,asn1.TYPE(asn1.IMPLICIT(4,cls=asn1.CONTEXT_FLAG),asn1.NULL))])),1),
     ('language',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),LanguageCode),1)], seq_name = 'Z3950CharacterSetLanguageClause')
-SQLOrderingDescriptor=asn1.SEQUENCE ([('orderingForm',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([('equals',1),('full',2),('none',3)],None,None)),0),
-    ('orderingCategory',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),    asn1.CHOICE ([('relativeRoutineName',None,asn1.TYPE(asn1.IMPLICIT(0,cls=asn1.CONTEXT_FLAG),InternationalString)),
-        ('hashRoutineName',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),InternationalString)),
-        ('stateRoutineName',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),InternationalString))])),0)], seq_name = 'SQLOrderingDescriptor')
 SQLQuery=asn1.SEQUENCE ([('abstractDatabaseFlag',None,asn1.TYPE(asn1.EXPLICIT(0,cls=asn1.CONTEXT_FLAG),asn1.BOOLEAN),1),
     ('queryExpression',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),InternationalString),0)], seq_name = 'SQLQuery')
 SQLException=asn1.SEQUENCE ([('sqlState',None,asn1.TYPE(asn1.IMPLICIT(0,cls=asn1.CONTEXT_FLAG),InternationalString),1),
@@ -1466,9 +1466,9 @@ SQLDataDescriptor=asn1.CHOICE ([('characterType',None,asn1.TYPE(asn1.IMPLICIT(1,
     ('sQLResultSetLocatorType',None,asn1.TYPE(asn1.IMPLICIT(51,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE ([('length',None,asn1.TYPE(asn1.IMPLICIT(0,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([],None,None)),0)], seq_name = None)))])
 SQLFieldValue=asn1.SEQUENCE ([('sqlException',None,asn1.TYPE(asn1.IMPLICIT(0,cls=asn1.CONTEXT_FLAG),SQLException),1),
     ('resultValue',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),SQLValue),1)], seq_name = 'SQLFieldValue')
-SQLRowValue=asn1.SEQUENCE_OF (SQLFieldValue)
 SQLDefaultOption=asn1.CHOICE ([('sqlValue',None,asn1.TYPE(asn1.IMPLICIT(0,cls=asn1.CONTEXT_FLAG),SQLValue)),
     ('other',None,asn1.TYPE(asn1.IMPLICIT(1,cls=asn1.CONTEXT_FLAG),asn1.INTEGER_class ([('user',1),('currentuser',2),('sessionuser',3),('systemuser',4),('currentpath',5),('sqlnull',6),('sqlempty',7)],None,None)))])
+SQLRowValue=asn1.SEQUENCE_OF (SQLFieldValue)
 SQLColumnDescriptor=asn1.SEQUENCE ([('columnName',None,asn1.TYPE(asn1.IMPLICIT(0,cls=asn1.CONTEXT_FLAG),InternationalString),0),
     ('dataType',None,asn1.TYPE(asn1.EXPLICIT(1,cls=asn1.CONTEXT_FLAG),asn1.NULL),0),
     ('columnConstraint',None,asn1.TYPE(asn1.IMPLICIT(2,cls=asn1.CONTEXT_FLAG),    asn1.SEQUENCE_OF (    asn1.SEQUENCE ([('nullable',None,asn1.TYPE(asn1.IMPLICIT(0,cls=asn1.CONTEXT_FLAG),asn1.BOOLEAN),0),
