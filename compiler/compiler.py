@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-
+from ply import lex, yacc
 
 import visitor
 
@@ -204,10 +204,8 @@ def t_error(t):
     raise LexError
 
     
-import lex
 lexer = lex.lex()
 
-import yacc
 
 class Node:
     def __init__(self,*args, **kw):

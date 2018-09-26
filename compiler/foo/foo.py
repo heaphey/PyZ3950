@@ -17,6 +17,7 @@ array of SRE_STATE instead of having it be statically declared of SRE_MARK_SIZE.
 We also ignore the {...} syntax for basic values, so we don't need separate
 lexer states.
 """
+from ply import lex, yacc
 
 class LexError(Exception): pass
 class ParseError(Exception): pass
@@ -196,10 +197,8 @@ def t_error(t):
     raise LexError
 
     
-import lex
 lexer = lex.lex()
 
-import yacc
 
 class Node:
     def __init__(self,type,children=None,leaf=None):

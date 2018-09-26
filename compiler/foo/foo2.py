@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-
+from ply import lex, yacc
 
 
 """Compiler from ASN.1 specification to the Python format acceptable
@@ -196,10 +196,8 @@ def t_error(t):
     raise LexError
 
     
-import lex
 lexer = lex.lex()
 
-import yacc
 
 class Node:
     def __init__(self,type,children=None,leaf=None):
