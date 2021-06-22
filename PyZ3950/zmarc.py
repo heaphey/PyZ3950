@@ -133,11 +133,11 @@ def parse_sub (field):
     ind1 = field[0]
     ind2 = field[1]
     sublist = []
-    splitlist = string.split (field[2:], sep)
+    splitlist = field[2:].split(sep)
     for sub in splitlist:
         if (sub == ''): # we begin w/ sep, so there's an empty prefix
             continue
-        sublist.append ((sub[0], string.strip(sub[1:])))
+        sublist.append ((sub[0], sub[1:].strip()))
     return (ind1, ind2, sublist)
     
 class MARC:
@@ -168,7 +168,8 @@ class MARC:
         self.reclen = reclen
         baseaddr = self.extract_int (12, 16)
         zerostr = ""
-        for ind in self.hdrbits: zerostr = zerostr + self.marc[ind]
+        for ind in self.hdrbits:
+          zerostr = zerostr + str(self.marc[ind])
         self.fields [0] = [zerostr]
         if strict:
             assert (self.marc[9] == ' ') # 'a' would be UCS/Unicode
@@ -197,7 +198,7 @@ class MARC:
             else:
                 pass # happens for same record as above.
 #                print "Weird, no hex 1E for", tag, repr(line)
-            field = string.atoi (tag)
+            field = int(tag)
             if is_fixed (field):
                 self.fields[field] = [line]
                 # 1-elt list for orthogonality of processing
@@ -233,7 +234,7 @@ class MARC:
         if bit.isspace():
             return 0
         try:
-            return string.atoi (bit)
+            return int(bit)
         except:
             raise MarcError("Un-intable string: %r in %r" % (bit, self.marc))
         
