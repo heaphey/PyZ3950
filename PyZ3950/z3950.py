@@ -225,7 +225,7 @@ class Conn:
                 return self.decode_ctx.get_first_decoded ()
             try:
                 b = self.readproc ()
-                self.decode_ctx.feed (list(map (ord, b)))
+                self.decode_ctx.feed (b)
             except asn1.BERError as val:
                 raise self.ProtocolError ('ASN1 BER', str(val))
 
@@ -411,7 +411,6 @@ class Server (Conn):
         dresp.deleteOperationStatus = 0
         self.send (('deleteResultSetResponse', dresp))
     def esrequest (self, esreq):
-        print("ES", esreq)
         esresp = ExtendedServicesResponse ()
         esresp.operationStatus = ExtendedServicesResponse['operationStatus'].get_num_from_name ('failure')
         self.send (('extendedServicesResponse', esresp))
