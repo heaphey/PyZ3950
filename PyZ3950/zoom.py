@@ -155,7 +155,7 @@ _record_type_dict = {}
 
 def _oid_to_key (oid):
     for (k,v) in list(_record_type_dict.items ()):
-        if v.oid == oid:
+        if str(v.oid) == str(oid):
             return k
     raise UnknownRecSyn (oid)
 
@@ -337,7 +337,7 @@ class Connection(_AttrCheck, _ErrHdlr):
                                    **_extract_attrs (self, self.search_attrs))
         self._resultSetCtr += 1
         rs = ResultSet (self, recv, cur_rsn, self._resultSetCtr)
-        return rs        
+        return rs
     # and 'Error Code', 'Error Message', and 'Addt'l Info' methods still
     # eeded
     def scan (self, query):
@@ -602,7 +602,7 @@ class ResultSet(_AttrCheck, _ErrHdlr):
                 lbound = i
                 count = len (self) - lbound
             else:
-                lbound = (i / maxreq) * maxreq
+                lbound = (i // maxreq) * maxreq
                 count = min (maxreq, len (self) - lbound)
             kw = self._make_keywords ()
             if self._get_rec (lbound) == None:
