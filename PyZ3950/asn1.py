@@ -127,6 +127,8 @@ import string
 import copy
 import math
 
+# test heaphey
+from inspect import currentframe, getframeinfo
 
 # - elements should expose a list of possible tags, instead of just one tag,
 #    bringing CHOICE into line with other elements
@@ -170,6 +172,7 @@ trace_byte = 0
 trace_bitstring = 0
 trace_string = 0
 trace_codec = 0
+
 
 # Note: BERError is only for decoding errors (either input data is illegal
 # BER, or input data is legal BER but we don't support it.)
@@ -253,8 +256,8 @@ class StructBase(object):
         i = list(self.__dict__.items ())
         i.sort ()
         i = [it for it in i if it[0][0] != '_']
-        s = s + string.join ([repr (it[0]) +
-                                  ' ' + repr (it[1]) for it in i], '\n')
+        s = s + '\n'.join([repr (it[0]) + ' ' + repr (it[1]) for it in i])
+        
         s = s + ']\n'
         return s
     def __cmp__ (self, other):
@@ -354,10 +357,12 @@ class CtxBase:
         self.codec_dict_stack[-1][defn_inst.base_tag] = (codec, strip_bom)
     def get_codec (self, base_tag):
         def default_enc (x):
-            if isinstance (x, str):
+            #if isinstance (x, str):
+            if isinstance (x, type(b'')):
                 return (x.encode ('ascii'), 0)
-            elif isinstance (x, str):
-                return (x.encode ('utf-8'), 0)
+                #return (x.encode ('utf-8'), 0)
+            #elif isinstance (x, str):
+            #    return (x.encode ('utf-8'), 0)
             return (x, 0)
         identity = ((default_enc, lambda x:(x,0)), 0)
         # we ignore lengths consumed.  I don't think this means
@@ -628,7 +633,13 @@ class WriteCtx (CtxBase):
         if isinstance (data, type ([])):
             self.buf.fromlist (data)
         elif isinstance (data, type ('')):
-            self.buf.fromstring (data)
+            templist = list(map (ord, data))
+            # let's try filling the buffer from the ord values, which look correct. (fromstring seems to be doing something weird)
+            self.buf.fromlist (templist)
+            #self.buf.fromstring (data)  # this is dumping extra characters in, namely decimal value 194
+        elif isinstance (data, type (b'')):
+            # Not sure if this is necessary
+            self.buf.frombytes (data)
         else:
             raise EncodingError("Bad type to bytes_write")
 
@@ -642,7 +653,7 @@ def extract_bits (val, lo_bit, hi_bit):
 log_of_2 = math.log (2)
 
 def log2 (x):
-    return int(math.log (x) // log_of_2)
+    return int(math.log (x) / log_of_2)
 
 class PERWriteCtx(WriteCtx):
     def __init__ (self, aligned = 0, canonical = 0):
@@ -716,8 +727,6 @@ class PERWriteCtx(WriteCtx):
             self.write_bits_unaligned (1,1)
             self.write_semiconstrained_int (val, 0)
 
-
-
 class BERWriteCtx(WriteCtx):
     def __init__ (self):
         WriteCtx.__init__ (self)
@@ -768,14 +777,11 @@ class BERWriteCtx(WriteCtx):
         # array.pop not available in Python 1.5.2.  We could just use a
         # less efficient length encoding (long form w/leading 0 bytes
         # where necessary), but ...
-
         # XXX fix to use more efficient code, now that we don't support 1.5.2!
-
         for i in range (len(l) - lenlen):
             self.buf.insert (pos, 0)
         for i in range(len(l)):
             self.buf[pos + i] = l [i]
-
 
     def raise_error (self, descr):
         offset = len (self.buf)
@@ -1005,7 +1011,6 @@ class INTEGER_class (ELTBASE, NamedBase):
     def encode_per (self, ctx, val):
         assert (not self.extensible)
         assert (self.lo != None)
-        print("encoding", val, self.lo, self.hi)
         if self.hi == None:
             ctx.write_semiconstrained_int (val, self.lo)
         else:
@@ -1070,7 +1075,7 @@ class OCTSTRING_class (ConditionalConstr, ELTBASE):
         if strip_bom:
             val = val[2:]
         if trace_string:
-            print("encoded", val)
+            print("encoded", val.decode())
         return val
     def encode_val (self, ctx, val):
         val = self.handle_charset (ctx, val)
@@ -1180,7 +1185,7 @@ class CHOICE:
                 return (cname, ctyp)
         return 0
     def __repr__ (self):
-        return 'CHOICE: ' + string.join ([x[0] for x in self.choice], '\n')
+        return "CHOICE: " + "\n".join([x[0] for x in self.choice])
     # Note: we don't include types in the repr, because that can induce
     # infinite recursion.
     def encode (self, ctx, val):
@@ -1243,7 +1248,7 @@ class ANY_class(OCTSTRING_class): # inherit decode_val
             return tostr (tag_to_buf (tag)) + "\x80" + buf + "\0\0"
         else:
             buf_len = len (buf)
-            return tostr (tag_to_buf (tag)) + tostr (len_to_buf (buf_len)) +buf
+            return tostr (tag_to_buf (tag)) + tostr (len_to_buf (buf_len)) + buf
     def encode (self, ctx, val):
         ctx.bytes_write (self.encode_aux(val))
     def check_tag (self, seen_tag):
@@ -1444,8 +1449,7 @@ class SEQUENCE_BASE (ELTBASE):
         typ = TYPE (tag, typ)
         return (name, typ, optional)
     def __repr__ (self):
-        return  ('SEQUENCE: ' + repr (self.klass) +
-                 '\n' + string.join (list(map (repr, self.seq)), '\n'))
+        return  ('SEQUENCE: ' + repr (self.klass) + '\n' + '\n'.join(list(map (repr, self.seq))))
     def __getitem__ (self, key):
         for e in self.seq:
             if e[0] == key:
@@ -1538,8 +1542,7 @@ def mk_seq_class_name ():
 class EXTERNAL_class (SEQUENCE_BASE):
     tag = (CONS_FLAG, EXTERNAL_TAG)
     def __repr__ (self):
-        return  ('EXTERNAL: ' + repr (self.klass) +
-                 '\n' + string.join (list(map (repr, self.seq)), '\n'))
+        return  ('EXTERNAL: ' + repr (self.klass) + '\n' + '\n'.join(list(map (repr, self.seq))))
     class ConsElt(SeqConsElt):
         def __init__ (self, seq, ctx):
             self.ctx = ctx
@@ -1638,8 +1641,6 @@ import math
 
 class REAL_class (SEQUENCE_BASE):
     tag = (CONS_FLAG, REAL_TAG)
-
-
 
 # note clients are allowed to treat equal numbers in different bases as
 # different, so keep mantissa/base/exponent
@@ -2000,10 +2001,6 @@ def run (print_flag):
             print("Starting", indef_len_encodings, cons_encoding)
             t.run ()
             print("byte offset", t.idc1.offset, t.idc2.offset)
-
-
-
-
 
 
 if __name__ == '__main__':
