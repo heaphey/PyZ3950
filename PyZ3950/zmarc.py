@@ -154,7 +154,7 @@ class MARC:
     # Status, Type, Bib. Level, Type of Ctrl., Enc. Level,
     # Descr. Cat. Form, Linked Rcd Reqt are all part of pseudoentry 0
 
-    def __init__(self, MARC = None, strict = 1):
+    def __init__(self, MARC = None, strict = 0):
         """Parses MARC data.  According to Bill Oldroyd (Bill.Oldroyd at
         bl.uk), some servers don't set the character set and/or other
         bits of the MARC header properly, so it's useful to set strict=0
