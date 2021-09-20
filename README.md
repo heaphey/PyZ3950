@@ -1,10 +1,21 @@
 # PyZ3950
 
-<img src="https://travis-ci.org/danizen/PyZ3950.svg?branch=master" alt="Build Status">
-
 ## Summary
 
 Pure-python Z39.50 implementation
+
+## More Update Notes
+
+This code is based on the work that Dan Davis started.  I did not attempt to support 
+Python 2.7+.  I have made additional changes to get the code to work
+with Python 3.7.  My testing capabilities are limited, so i was mainly interested
+in updating the code to fetch MARC records from OCLC, etc.
+The code should now allow users to fetch MARC records from Z3950 servers using Python 3.7
+(follow the zmarc_example.py, which I have updated to work with the new code changes,
+in the example directory).
+
+Joe Heaphey <heaphey@deakin.edu.au>
+
 
 ## Update Notes 
 

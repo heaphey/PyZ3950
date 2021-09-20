@@ -16,34 +16,39 @@ import tempfile
 
 from PyZ3950 import zoom
 from PyZ3950 import zmarc
+import codecs
 
 def RunQuery():
     "Run a Z39.50 query & save MARC results to files"
     #open connection
-    conn = zoom.Connection ('z3950.loc.gov', 7090)
-    conn.databaseName = 'VOYAGER'
+    conn = zoom.Connection ('lx2.loc.gov', 210)
+    conn.databaseName = 'LCDB'
     conn.preferredRecordSyntax = 'USMARC'
     
     #setup query
-    query = zoom.Query('CCL', 'ti="1066 and all that"')
-    
+    #query = zoom.Query('CCL', 'ti="1066 and all that"')
+    query = zoom.Query('CCL', 'ti="The Science of Cognitive Behavioral Therapy"')
+
     #run query
     res = conn.search(query)
     
     #for each record in the resultset, save as file
     ifilecount = 0
     for r in res:
+        print(r)
         sSaveAs = os.path.join(tempfile.gettempdir(),
                                "PyZ3950 search resultset %d.bin" % ifilecount)
         print("Saving as file:", sSaveAs)
-        fx = open(sSaveAs, "wb")
-        fx.write(r.data)
+        fx = codecs.open(sSaveAs, 'w+', 'utf-8')
+        fx.write(bytes([ord(char) for char in r.data]).decode('utf-8'))
         fx.close()
         ifilecount += 1
         #parse each record as we save
         ParseRecord(sSaveAs)
     #close connection
     conn.close()
+    
+
 
 
 def _GetValue(skey, tlist):
